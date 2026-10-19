@@ -16,6 +16,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -27,24 +28,24 @@ class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val detailRoute: DetailRoute = savedStateHandle.toRoute()
+    private val route: DetailRoute = savedStateHandle.toRoute()
+    val imdbId: String = route.imdbId
 
-    private val _state = MutableStateFlow(DetailState(imdbId = detailRoute.imdbId))
+    private val _state = MutableStateFlow(DetailState(imdbId = imdbId))
     val state = _state.asStateFlow()
 
     private val _eventFlow = Channel<DetailEvent>(Channel.BUFFERED)
     val eventFlow = _eventFlow.receiveAsFlow()
 
+    private val detailRawState = MutableStateFlow<SResult<MovieDetailObj, Any?>>(SResult.Initial)
+
     init {
-        loadDetail(detailRoute.imdbId)
+        observeDetailFlow(imdbId)
+        fetchMovieDetail(imdbId)
     }
 
     fun onAction(action: DetailAction) {
         when (action) {
-            is DetailAction.LoadDetail -> {
-                _state.update { it.copy(imdbId = action.imdbId) }
-                loadDetail(action.imdbId)
-            }
             is DetailAction.ToggleFavorite -> {
                 toggleFavorite(action.detail)
             }
@@ -56,29 +57,29 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private fun loadDetail(imdbId: String) {
+    private fun observeDetailFlow(imdbId: String) {
         viewModelScope.launch {
-            movieRepository.getMovieDetail(imdbId).collectLatest { result ->
-                _state.update { it.copy(detailState = result) }
+            combine(
+                detailRawState,
+                movieRepository.isFavoriteFlow(imdbId)
+            ) { detailResult, isFav ->
+                val mappedResult: SResult<MovieDetailObj, Any?> = when (detailResult) {
+                    is SResult.Success -> {
+                        SResult.Success(detailResult.data.copy(isFavorite = isFav))
+                    }
+                    else -> detailResult
+                }
+                mappedResult
+            }.collectLatest { newResult ->
+                _state.update { it.copy(detailState = newResult) }
             }
         }
+    }
 
-        // Observe real-time favorite updates
+    private fun fetchMovieDetail(imdbId: String) {
         viewModelScope.launch {
-            movieRepository.isFavoriteFlow(imdbId).collectLatest { isFav ->
-                val current = _state.value.detailState
-                if (current is SResult.Success) {
-                    _state.update { currentState ->
-                        val currentResult = currentState.detailState
-                        if (currentResult is SResult.Success) {
-                            currentState.copy(
-                                detailState = SResult.Success(currentResult.data.copy(isFavorite = isFav))
-                            )
-                        } else {
-                            currentState
-                        }
-                    }
-                }
+            movieRepository.getMovieDetail(imdbId).collectLatest { result ->
+                detailRawState.value = result
             }
         }
     }

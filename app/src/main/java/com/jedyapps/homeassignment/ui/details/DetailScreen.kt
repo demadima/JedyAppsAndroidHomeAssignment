@@ -57,10 +57,6 @@ fun DetailScreen(
     val state by viewModel.state.collectAsState()
     val context = LocalContext.current
 
-    LaunchedEffect(imdbId) {
-        viewModel.onAction(DetailAction.LoadDetail(imdbId))
-    }
-
     LaunchedEffect(viewModel.eventFlow) {
         viewModel.eventFlow.collectLatest { event ->
             when (event) {
