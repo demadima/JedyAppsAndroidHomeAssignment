@@ -1,0 +1,9 @@
+com.jedyapps.sdk-pngs-0 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/build/generated/res/pngs/debug
+com.jedyapps.sdk-updated_navigation_xml-1 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/build/generated/updated_navigation_xml/debug
+com.jedyapps.sdk-mergeDebugResources-2 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.jedyapps.sdk-mergeDebugResources-3 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.jedyapps.sdk-debug-4 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/build/intermediates/merged_res/debug/mergeDebugResources
+com.jedyapps.sdk-debug-5 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/build/intermediates/packaged_res/debug/packageDebugResources
+com.jedyapps.sdk-debug-6 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/src/debug/res
+com.jedyapps.sdk-main-7 /Users/dimadema/Desktop/Dima/TestForJob/JedyAppsAndroidHomeAssignment/sdk/src/main/res
+gradleHome-0 /Users/dimadema/.gradle

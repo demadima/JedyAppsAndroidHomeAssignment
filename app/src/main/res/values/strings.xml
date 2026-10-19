@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">JedyApps Android Home Assignment</string>
+
+    <!-- Search Screen -->
+    <string name="search_screen_title">OMDB Movie Search</string>
+    <string name="search_placeholder">Search movies by keyword…</string>
+    <string name="no_movies_found">No movies found.</string>
+    <string name="search_initial_hint">Type a keyword above to search movies</string>
+
+    <!-- Details Screen -->
+    <string name="detail_screen_title">Movie Details</string>
+    <string name="detail_error_failed">Failed to load movieObj details.</string>
+    <string name="detail_plot_header">Plot</string>
+    <string name="detail_genre_format">Genre: %1$s</string>
+    <string name="detail_director_format">Director: %1$s</string>
+    <string name="detail_cast_format">Cast: %1$s</string>
+
+    <!-- Favorites Screen -->
+    <string name="favorites_screen_title">Favorite Movies</string>
+    <string name="no_favorites_saved">No favorite movies saved yet.</string>
+
+    <!-- Repository Error & Fallback Strings -->
+    <string name="error_no_movies_found">No movies found.</string>
+    <string name="error_failed_load_details">Failed to load movieObj details.</string>
+    <string name="unknown_title">Unknown Title</string>
+    <string name="no_plot_available">No plot available.</string>
+    <string name="error_generic">An error occurred while fetching data.</string>
+</resources>

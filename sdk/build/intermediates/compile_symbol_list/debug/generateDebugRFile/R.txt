@@ -1,0 +1,5 @@
+int string ad_badge 0x0
+int string ad_fallback_body 0x0
+int string learn_more 0x0
+int string sdk_app_name 0x0
+int string sponsored_ad 0x0

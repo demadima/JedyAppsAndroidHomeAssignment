@@ -1,0 +1,6 @@
+com.jedyapps.sdk
+string ad_badge
+string ad_fallback_body
+string learn_more
+string sdk_app_name
+string sponsored_ad

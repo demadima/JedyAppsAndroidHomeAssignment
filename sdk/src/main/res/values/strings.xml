@@ -1,0 +1,7 @@
+<resources>
+    <string name="sdk_app_name">JedyApps SDK</string>
+    <string name="ad_badge">Ad</string>
+    <string name="sponsored_ad">Sponsored Ad</string>
+    <string name="ad_fallback_body">Discover top recommended movies and entertainment!</string>
+    <string name="learn_more">Learn More</string>
+</resources>
